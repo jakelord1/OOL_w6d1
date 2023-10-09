@@ -1,66 +1,55 @@
 ﻿#include <iostream>
 #include <string>
 using namespace std;
-class Person {
+class Square {
 protected:
-    string name;
-    int age;
+    int side;
 public:
-    Person() = default;
-    Person(string n, int a) { name = n; age = a; }
-    void Show() { cout << "Name: " << name << "\tAge: " << age << endl; }
+    Square() = default;
+    Square(int a) { side = a; }
+    void Show() { cout << "Square Side: " << side << endl; }
     void Input() {
-        string n = " ";
         int a = 0;
-        cin >> n;
         cin >> a;
-        name = n;
-        age = a;
+        side= a;
     }
 };
-class Univer {
+class Circle {
 protected:
-    string name;
-    string addres;
+    int rad;
 public:
-    Univer() = default;
-    Univer(string n, string a) { name = n; addres = a; }
-    void Show() { cout << "Name: " << name << "\tAddres: " << addres << endl; }
+    Circle() = default;
+    Circle(int r) { rad = r; }
+    void Show() { cout << "Circle radius : " << rad << endl; }
     void Input() {
-        string n = " ", a = " ";
-        cin >> n;
-        cin >> a;
-        name = n;
-        addres = a;
+        int r = 0;
+        cin >> r;
+        rad = r;
     }
 };
-class Student : public Person, public Univer {
+class CircleInSquare : public Square, public Circle {
+protected:
+    bool IsSimple;
 public:
-    Student() = default;
-    Student(string pn, int pa, string un, string ua) : Person(pn, pa), Univer(un, ua) {}
+    CircleInSquare() = default;
+    CircleInSquare(int s, int c) : Square(s), Circle(c) { c <= s ? IsSimple = true : IsSimple = false; }
     void Show() {
-        Person::Show();
-        Univer::Show();
+        Square::Show();
+        Circle::Show();
+        if (IsSimple)
+            cout << "Simple CircleInSquare\n";
+        else
+            cout << "Circle is too big\n";
     }
     void Input() {
-        string n = " ";
-        int a = 0;
-        cin >> n;
-        cin >> a;
-        Person::name = n;
-        age = a;
-
-        string n = " ", a = " ";
-        cin >> n;
-        cin >> a;
-        Univer::name = n;
-        addres = a;
+        Square::Input();
+        Circle::Input();
+        Circle::rad <= Square::side ? IsSimple = true : IsSimple = false;
     }
 };
 int main()
 {
-    Student student("Adel", 20, "Itstep", "Some addres");
-    student.Person::Show();
-    student.Univer::Show();
-    student.Show();
+    CircleInSquare cins(50, 25);
+    cins.Square::Show();
+    cins.Show();
 }
