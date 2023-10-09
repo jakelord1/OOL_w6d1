@@ -42,6 +42,20 @@ public:
         Person::Show();
         Univer::Show();
     }
+    void Input() {
+        string n = " ";
+        int a = 0;
+        cin >> n;
+        cin >> a;
+        Person::name = n;
+        age = a;
+
+        string n = " ", a = " ";
+        cin >> n;
+        cin >> a;
+        Univer::name = n;
+        addres = a;
+    }
 };
 int main()
 {
